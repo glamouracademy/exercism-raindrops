@@ -1,31 +1,23 @@
-require 'prime'
 require 'pry'
 
 class Raindrops
+	PRIMES = { 
+		3 => 'Pling',
+		5 => 'Plang',
+		7 => 'Plong'
+	}
 
 	def self.convert(number)
-		
-		raindrops_prime_hash = {3 => 'Pling',
-					  			5 => 'Plang',
-			  		  			7 => 'Plong'}	
-		
-		number_prime_hash = Hash[Prime.prime_division(number)]
-
-		combined_values_array = []
-		
-		
-
-		combined_primes_hash = raindrops_prime_hash.select do |k,v| 
-			number_prime_hash.has_key?(k)
-			end  
-
-		combined_primes_hash.each_value do |v|
-			combined_values_array << v
+		factors = PRIMES.keys.select do |prime| 
+			(number % prime) == 0
 		end
 
-		combined_values_array.join
+		if factors.empty?
+			factors << number 
 
-		
+		else
+			factors.collect { |number| PRIMES.fetch(number)}.join
+		end		
 	end
 
 end
