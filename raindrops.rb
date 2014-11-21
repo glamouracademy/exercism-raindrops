@@ -8,11 +8,9 @@ class Raindrops
 	}
 
 	def self.convert(number)
-		PRIMES.select{ |prime, value| (number % prime) == 0 }.values.join
+		factors = PRIMES.select{ |prime, value| (number % prime) == 0 }.values.join
 
-		# factors << number if factors.empty?
-			
-		# factors.collect { |factor| PRIMES.fetch(factor, number)}.join	
+		factors.empty? ? number.to_s : factors
 	end
 
 end
